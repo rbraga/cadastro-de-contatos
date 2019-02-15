@@ -39,8 +39,24 @@ export class ContatoDetalheComponent implements OnInit {
         })        
     }
 
-    test(): void {
-        console.log();
+    getFormGroupClass(isValid: boolean, isPristine: boolean): {} {
+        return {
+            'form-group': true,
+            'has-danger': !isValid && !isPristine,
+            'has-success': isValid && !isPristine
+        };
     }
+
+    getFormControlClass(isValid: boolean, isPristine: boolean): {} {
+        return {
+            'form-control': true,
+            'form-control-danger': !isValid && !isPristine,
+            'form-control-success': isValid && !isPristine
+        };
+    }
+
+    // test(): void {
+    //     console.log();
+    // }
 
 }
