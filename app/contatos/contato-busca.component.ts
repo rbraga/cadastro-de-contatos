@@ -46,7 +46,7 @@ export class ContatoBuscaComponent implements OnInit, OnChanges {
     }
         
     ngOnChanges(changes: SimpleChanges): void {
-        let busca: SimpleChanges = changes['busca'];
+        let busca: SimpleChange = changes['busca'];
         this.search(busca.currentValue);
     }
 
