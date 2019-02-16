@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+
+import { Contato } from './contato.model';
+import { ContatoService } from './contato.service';
+
 @Component({
     moduleId: module.id,
     selector: 'contato-busca',
@@ -7,7 +13,28 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ContatoBuscaComponent implements OnInit {
-    constructor() { }
+    
+    contatos: Observable<Contato[]>;
+    private termosDaBusca: Subject<string> = new Subject<string>();
 
-    ngOnInit() { }
+    constructor(
+        private contatoService: ContatoService
+    ) { }
+
+    ngOnInit(): void { 
+        this.contatos = this.termosDaBusca
+            .debounceTime(600) // aguarde por 300mms para emitir novos eventos
+            .switchMap(term => {
+                console.log('Fez a busca: ', term);
+                return term ? this.contatoService.search(term) : Observable.of<Contato[]>([]);
+            });
+
+        this.contatos.subscribe((contatos: Contato[]) => {
+            console.log('retornou do servidor: ', contatos);
+        });
+    }
+
+    search(termo: string): void {
+        this.termosDaBusca.next(termo);
+    }
 }
