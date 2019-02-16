@@ -18,14 +18,18 @@ export class ContatoService {
     getContatos(): Promise<Contato[]> {
         return this.http.get(this.contatosUrl)
             .toPromise()
-            .then(response => response.json().data as Contato[]);
-
-        //return Promise.resolve(CONTATOS);
+            .then(response => response.json().data as Contato[])
+            .catch(this.handleError);
     }
 
     getContato(id: number): Promise<Contato> {
         return this.getContatos()
             .then((contatos: Contato[]) => contatos.find(contato =>  contato.id === id))
+    }
+
+    private handleError(err: any): Promise<any> {
+        console.log('Error: ', err);
+        return Promise.reject(err.message || err);
     }
 
     getContatosSlowly(): Promise<Contato[]> {

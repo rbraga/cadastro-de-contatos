@@ -19,7 +19,9 @@ export class ContatosListaComponent implements OnInit {
         this.contatoService.getContatos()
             .then((contatos: Contato[]) => {
                 this.contatos = contatos;
-            }).catch(err => console.log(err));
+            }).catch(err => {
+                console.log('Aconteceu um erro: ', err);
+            });
     }
     
 }
