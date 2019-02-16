@@ -14,6 +14,7 @@ import { Contato } from './contato.model';
 export class ContatoDetalheComponent implements OnInit {
 
     contato: Contato;
+    private isNew: boolean = true;
 
     constructor(
         private contatoService: ContatoService,
@@ -28,9 +29,9 @@ export class ContatoDetalheComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id: number = +params['id'];
 
-            
-
             if (id) {
+                this.isNew = false;
+
                 this.contatoService.getContato(id)
                 .then((contato: Contato) => {
                     this.contato = contato;
@@ -55,8 +56,11 @@ export class ContatoDetalheComponent implements OnInit {
         };
     }
 
-    // test(): void {
-    //     console.log();
-    // }
-
+    onSubmit(): void {
+        if (this.isNew){
+            console.log('cadastrar um novo contato!');
+        } else {
+            console.log('alterar um novo contato!');
+        }
+    }
 }

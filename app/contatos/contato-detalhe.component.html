@@ -2,7 +2,7 @@
 
     <h2>Salvar Contato</h2>
 
-    <form #contatoForm="ngForm" novalidate>
+    <form (ngSubmit)="onSubmit()" #contatoForm="ngForm" novalidate>
 
         <div [ngClass]="getFormGroupClass(nome.valid, nome.pristine)" >
             <label for="nome" >Nome</label>
@@ -42,6 +42,6 @@
 
     </form>
 
-    <button (click)="test()" class="btn btn-warning">Log</button>
+    
 
 </div>
