@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, OnChanges, Input, SimpleChanges, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnChanges, Input, SimpleChanges, Output, SimpleChange } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
